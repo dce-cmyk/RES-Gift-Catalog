@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapidan Equine Sanctuary Gift Catalog</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"> <!-- Optional: Add favicon later -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        header { background-color: #4a7c59; color: white; padding: 20px; text-align: center; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin: 0 15px; }
+        nav ul li a { color: white; text-decoration: none; }
+        .hero { background-color: #e8f5e8; padding: 40px; text-align: center; }
+        .catalog { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .item { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .item img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; }
+        .price { font-size: 1.2em; font-weight: bold; color: #4a7c59; }
+        button { background: #4a7c59; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin: 5px; }
+        button:hover { background: #3a5f44; }
+        .cart-summary { background: #e8f5e8; padding: 15px; text-align: center; margin: 20px auto; max-width: 1200px; border-radius: 8px; }
+        #checkout { display: none; background: white; padding: 20px; margin: 20px auto; max-width: 600px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        #checkout form { display: flex; flex-direction: column; }
+        #checkout input, #checkout select, #checkout textarea { margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        #ecard-preview { margin-top: 20px; padding: 15px; background: #f9f9f9; border-radius: 4px; text-align: center; }
+        footer { background: #333; color: white; text-align: center; padding: 10px; margin-top: 40px; }
+        @media (max-width: 600px) { .catalog { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rapidan Equine Sanctuary</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Gift Catalog</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Stories</a></li>
+                <li><a href="#">Donate</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h2>Send an Honor Gift for Horses in Need!</h2>
+        <p>Bless friends and family by funding equine care in their honor. We'll send a custom e-card the same day!</p>
+        <button onclick="scrollToCatalog()">Shop Gifts</button>
+    </section>
+    
+    <section class="catalog" id="catalog">
+        <div class="item">
+            <img src="https://images.pexels.com/photos/376267/pexels-photo-376267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Horses with kids at the sanctuary">
+            <h3>Monthly Hay Bale</h3>
+            <p>Provides essential feed for one rescued horse, ensuring nutrition and health.</p>
+            <div class="price">$50</div>
+            <input type="number" id="qty-monthly-hay-bale" value="1" min="1" style="width: 50px;"> <button onclick="addToCart('Monthly Hay Bale', 50, 'horse1.jpg')">Add to Gift</button>
+        </div>
+        <div class="item">
+            <img src="https://images.pexels.com/photos/1090540/pexels-photo-1090540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sanctuary horse in pasture">
+            <h3>Emergency Vet Care</h3>
+            <p>Life-saving treatment for an injured or ill horse in our care.</p>
+            <div class="price">$100</div>
+            <input type="number" id="qty-emergency-vet-care" value="1" min="1" style="width: 50px;"> <button onclick="addToCart('Emergency Vet Care', 100, 'horse2.jpg')">Add to Gift</button>
+        </div>
+        <div class="item">
+            <img src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Farrier working on horse">
+            <h3>Farrier Trimming</h3>
+            <p>Professional hoof care to keep horses sound and mobile.</p>
+            <div class="price">$75</div>
+            <input type="number" id="qty-farrier-trimming" value="1" min="1" style="width: 50px;"> <button onclick="addToCart('Farrier Trimming', 75, 'horse3.jpg')">Add to Gift</button>
+        </div>
+        <div class="item">
+            <img src="https://images.pexels.com/photos/1090540/pexels-photo-1090540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Enrichment activity with horses">
+            <h3>Enrichment Toys</h3>
+            <p>Mental stimulation items to reduce stress for rehabilitating equines.</p>
+            <div class="price">$60</div>
+            <input type="number" id="qty-enrichment-toys" value="1" min="1" style="width: 50px;"> <button onclick="addToCart('Enrichment Toys', 60, 'horse4.jpg')">Add to Gift</button>
+        </div>
+        <div class="item">
+            <img src="https://images.pexels.com/photos/376267/pexels-photo-376267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sponsored horse">
+            <h3>Horse Sponsorship</h3>
+            <p>Monthly support for a specific horse's care, with updates and photos.</p>
+            <div class="price">$150</div>
+            <input type="number" id="qty-horse-sponsorship" value="1" min="1" style="width: 50px;"> <button onclick="addToCart('Horse Sponsorship', 150, 'horse5.jpg')">Add to Gift</button>
+        </div>
+        <div class="item">
+            <img src="https://images.pexels.com/photos/247502/pexels-photo-247502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Workshop at sanctuary">
+            <h3>Equine Workshop Ticket</h3>
+            <p>Educational session on horse welfare for you or as a gift.</p>
+            <div class="price">$80</div>
+            <input type="number" id="qty-equine-workshop-ticket" value="1" min="1" style="width: 50px;"> <button onclick="addToCart('Equine Workshop Ticket', 80, 'horse6.jpg')">Add to Gift</button>
+        </div>
+        <div class="item">
+            <img src="https://images.pexels.com/photos/1090540/pexels-photo-1090540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Facility upgrade">
+            <h3>Pasture Fencing Upgrade</h3>
+            <p>Safer enclosures for more horses to roam and heal.</p>
+            <div class="price">$200</div>
+            <input type="number" id="qty-pasture-fencing-upgrade" value="1" min="1" style="width: 50px;"> <button onclick="addToCart('Pasture Fencing Upgrade', 200, 'horse7.jpg')">Add to Gift</button>
+        </div>
+    </section>
+
+    <section class="cart-summary">
+        <h3>Cart Summary</h3>
+        <p id="cart-info">No items yet. Total: $0</p>
+        <button onclick="showCheckout()" id="checkout-btn" style="display: none;">Proceed to Checkout</button>
+    </section>
+
+    <section id="checkout">
+        <h3>Checkout & Honor Gift</h3>
+        <form id="gift-form">
+            <label>Dedication Type:</label>
+            <select id="dedication-type">
+                <option value="honor">In Honor Of</option>
+                <option value="memory">In Memory Of</option>
+                <option value="general">General Donation</option>
+            </select>
+            <label>Recipient Name:</label>
+            <input type="text" id="recipient-name" placeholder="Enter name" required>
+            <label>Message:</label>
+            <textarea id="message" placeholder="Personal note (optional)"></textarea>
+            <button type="button" onclick="previewECard()">Preview E-Card</button>
+            <div id="ecard-preview"></div>
+            <button type="button" onclick="completeCheckout()">Complete Gift (Simulate Payment)</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Rapidan Equine Sanctuary. Items illustrate sanctuary projects. All gifts support equine rescue; up to 10% for admin. We control fund use for best impact. Inspired by compassionate care on the banks of the Rapidan River.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+
+        function addToCart(item, price, img) {
+            const qtyInput = document.getElementById(`qty-${item.toLowerCase().replace(/ /g, '-')}`);
+            if (qtyInput) {
+                const qty = parseInt(qtyInput.value) || 1;
+                for (let i = 0; i < qty; i++) {
+                    cart.push({ item, price, img });
+                }
+                updateCartSummary();
+            }
+        }
+
+        function updateCartSummary() {
+            const totalItems = cart.length;
+            const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-info').innerHTML = `Items: ${totalItems} | Total: $${totalAmount}`;
+            document.getElementById('checkout-btn').style.display = totalItems > 0 ? 'inline' : 'none';
+        }
+
+        function showCheckout() {
+            document.getElementById('checkout').style.display = 'block';
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function previewECard() {
+            const type = document.getElementById('dedication-type').value;
+            const name = document.getElementById('recipient-name').value;
+            const message = document.getElementById('message').value;
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const preview = document.getElementById('ecard-preview');
+            preview.innerHTML = `
+                <h4>E-Card Preview</h4>
+                <p><strong>${type === 'honor' ? 'In Honor Of' : 'In Memory Of'}: ${name}</strong></p>
+                <p>Thank you for your gift of $${total} to Rapidan Equine Sanctuary!</p>
+                <p>${message || 'Your generosity helps rescued horses thrive.'}</p>
+                <img src="${cart[0]?.img ? 'https://images.pexels.com/photos/376267/pexels-photo-376267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' : 'https://via.placeholder.com/200x100?text=RES+Logo'}" alt="Featured Horse" style="width: 200px; height: auto;">
+            `;
+        }
+
+        function completeCheckout() {
+            alert('Thank you! Your gift is processed. E-card sent—check your email simulation. Redirecting to thank-you page...');
+            cart = [];
+            updateCartSummary();
+            document.getElementById('checkout').style.display = 'none';
+        }
+
+        function scrollToCatalog() {
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Load cart on page load
+        updateCartSummary();
+    </script>
+</body>
+</html>
